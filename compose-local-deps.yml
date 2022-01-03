@@ -1,0 +1,14 @@
+version: '2'
+services:
+  postgres:
+    network_mode: bridge
+    container_name: postgres
+    image: postgres:12
+    volumes:
+      - pg-local:/var/lib/postgresql/data
+      - ./src/resources/db_scripts/postgres-create-tables.sql:/docker-entrypoint-initdb.d/00-create.sql:ro
+    environment:
+      POSTGRES_USER: conferr
+      POSTGRES_PASSWORD: conf3rr
+    ports:
+      - "5432:5432"
